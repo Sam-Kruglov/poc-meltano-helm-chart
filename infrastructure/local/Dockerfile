@@ -19,8 +19,8 @@ ENV MELTANO_PROJECT_READONLY 1
 
 # Copy over remaining project files
 COPY . .
-COPY orchestrate/webserver_config.py .meltano/run/airflow/webserver_config.py
-COPY orchestrate/pod-template-file.yml .meltano/run/airflow/pod-template-file.yml
+COPY infrastructure/local/files/webserver_config.py .meltano/run/airflow/webserver_config.py
+COPY infrastructure/local/files/pod-template-file.yml .meltano/run/airflow/pod-template-file.yml
 
 # Expose default port used by `meltano ui`
 EXPOSE 5000

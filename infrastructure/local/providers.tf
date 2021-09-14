@@ -1,13 +1,5 @@
 terraform {
   required_providers {
-    kind = {
-      source  = "kyma-incubator/kind"
-      version = "0.0.9"
-    }
-    docker = {
-      source  = "kreuzwerker/docker"
-      version = "2.14.0"
-    }
     kubernetes = {
         source = "hashicorp/kubernetes"
         version = "2.4.1"
@@ -15,6 +7,14 @@ terraform {
     helm = {
         source = "hashicorp/helm"
         version = "2.2.0"
+    }
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "2.14.0"
+    }
+    kind = {
+      source  = "kyma-incubator/kind"
+      version = "0.0.9"
     }
   }
 }

@@ -112,3 +112,17 @@ resource "kubernetes_namespace" "meltano" {
   }
   depends_on = [kind_cluster.meltano]
 }
+
+# Deploy an NFS Server Provisioner for logging and output storage
+resource "helm_release" "nfs_server_provisioner" {
+  name        = "nfs-server-provisioner"
+  repository  = "https://helm.wso2.com/"
+  chart       = "nfs-server-provisioner"
+  namespace   = "meltano"
+  version     = "1.1.0"
+  wait        = true
+  values = [
+    "${file("files/nfs-server-provider-values.yml")}"
+  ]
+  depends_on = [kind_cluster.meltano]
+}

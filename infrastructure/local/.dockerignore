@@ -1,3 +1,4 @@
+# Don't bake local tf artifacts into docker image
 .terraform
 .terraform.lock.hcl
 terraform.tfstate
