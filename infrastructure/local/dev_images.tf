@@ -12,4 +12,5 @@ resource "docker_image" "meltano" {
   provisioner "local-exec" {
     command = "docker push localhost:5000/meltano:latest"
   }
+  depends_on = [docker_container.registry]
 }
