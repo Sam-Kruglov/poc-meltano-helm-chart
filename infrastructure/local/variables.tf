@@ -3,3 +3,8 @@ variable "include_prometheus" {
     type = bool
     default = true
 }
+variable "include_postgres" {
+    description = "Deploy postgres database (will use localhost otherwise)?"
+    type = bool
+    default = true
+}

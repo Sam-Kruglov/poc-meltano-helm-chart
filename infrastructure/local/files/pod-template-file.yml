@@ -14,10 +14,6 @@ spec:
       env:
         - name: AIRFLOW__CORE__EXECUTOR
           value: LocalExecutor
-        - name: MELTANO_DATABASE_URI
-          value: "postgresql://postgres:postgres@postgresql.meltano:5432/meltano?sslmode=disable"
-        - name: "AIRFLOW__CORE__SQL_ALCHEMY_CONN"
-          value: "postgresql://postgres:postgres@postgresql.meltano:5432/airflow?sslmode=disable"
       image: registry:5000/meltano:latest
       imagePullPolicy: Always
       name: base

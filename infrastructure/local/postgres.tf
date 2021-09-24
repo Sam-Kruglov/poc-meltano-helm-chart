@@ -5,6 +5,7 @@ resource "helm_release" "postgres" {
   namespace   = "meltano"
   version     = "10.5.3"
   wait        = true
+  count = "${var.include_postgres == true ? 1 : 0}
 
   set {
     name  = "postgresqlDatabase"

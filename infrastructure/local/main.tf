@@ -1,6 +1,9 @@
 # Dev ENV vars
 locals {
-  meltano_env_variables = []
+  meltano_env_variables = {
+    "MELTANO_DATABASE_URI": "postgresql://postgres:postgres@${var.include_postgres ? "postgresql.meltano:5432" : "host.docker.internal:5432"}/meltano?sslmode=disable"
+    "AIRFLOW__CORE__SQL_ALCHEMY_CONN": "postgresql://postgres:postgres@${var.include_postgres ? "postgresql.meltano:5432" : "host.docker.internal:5432"}/airflow?sslmode=disable"
+  }
 }
 
 resource "helm_release" "meltano" {

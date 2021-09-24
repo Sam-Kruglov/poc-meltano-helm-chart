@@ -33,10 +33,14 @@ resource "kind_cluster" "meltano" {
         host_port      = 443
         protocol       = "TCP"
       }
-      extra_port_mappings {
-        container_port = 5432
-        host_port      = 5432
-        protocol       = "TCP"
+      # only add port mappings if postgres is included
+      dynamic "extra_port_mappings" {
+        for_each = var.include_postgres ? [1] : []
+        content {
+          container_port = 5432
+          host_port      = 5432
+          protocol       = "TCP"
+        }
       }
     }
     # Add worker Node
@@ -74,7 +78,7 @@ resource "kubernetes_namespace" "prometheus" {
     name = "prometheus"
   }
   depends_on = [kind_cluster.meltano]
-  count = "${var.include_prometheus == true ? 1 : 0}"
+  count = "${var.include_prometheus ? 1 : 0}"
 }
 
 resource "helm_release" "prometheus" {
@@ -84,7 +88,7 @@ resource "helm_release" "prometheus" {
   namespace   = "prometheus"
   wait        = false
   depends_on = [kubernetes_namespace.prometheus]
-  count = "${var.include_prometheus == true ? 1 : 0}"
+  count = "${var.include_prometheus ? 1 : 0}"
 }
 
 # Start a registry container
